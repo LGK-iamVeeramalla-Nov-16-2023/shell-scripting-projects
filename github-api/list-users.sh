@@ -1,5 +1,15 @@
 #!/bin/bash
 
+#########################
+#About:
+#Input:
+#
+#Owner:
+#
+########################
+
+#helper ()
+
 # GitHub API URL
 API_URL="https://api.github.com"
 
@@ -24,8 +34,9 @@ function github_api_get {
 function list_users_with_read_access {
     local endpoint="repos/${REPO_OWNER}/${REPO_NAME}/collaborators"
 
-    # Fetch the list of collaborators on the repository
-    collaborators="$(github_api_get "$endpoint" | jq -r '.[] | select(.permissions.pull == true) | .login')"
+    # Fetch the list of collaborators on the repository=================>>
+    collaborators="$(github_api_get "$endpoint")"
+    #collaborators="$(github_api_get "$endpoint" | jq -r '.[] | select(.permissions.admin == true) | .login')"
 
     # Display the list of collaborators with read access
     if [[ -z "$collaborators" ]]; then
@@ -35,6 +46,15 @@ function list_users_with_read_access {
         echo "$collaborators"
     fi
 }
+
+#Assignment====>WRITE a helper Function
+
+#function helper {
+#expected_cmd_args=2
+#if [ $# -ne $expected_cmd_args]; then
+#	echo "Please execute the script with required command parameters or arguments"
+#	echo "abcd"
+#}
 
 # Main script
 
